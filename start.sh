@@ -1,11 +1,12 @@
 #!/bin/bash
-export PORT=${PORT:-2053}
+
+# Ensure runtime directory exists for Alpine Nginx
+mkdir -p /run/nginx
+
+# Force 3x-ui to listen internally on port 2052
 export XUI_PORT=2052
 
-# Render nginx config with Railway's public PORT
-envsubst '$PORT' < /etc/nginx/nginx.conf.template > /etc/nginx/nginx.conf
-
-# Start Nginx
+# Start Nginx in background
 nginx
 
 # Start 3x-ui
