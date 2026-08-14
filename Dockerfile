@@ -1,6 +1,7 @@
 FROM ghcr.io/mhsanaei/3x-ui:latest
 
-RUN apt-get update && apt-get install -y nginx gettext-base && rm -rf /var/lib/apt/lists/*
+# Install Nginx and required utilities using Alpine's package manager (apk)
+RUN apk add --no-cache nginx gettext bash
 
 COPY nginx.conf.template /etc/nginx/nginx.conf.template
 COPY start.sh /start.sh
